@@ -31,7 +31,7 @@ function fetchLocal() {
 	
 }
 var imax=itemOperations.itemList.length;
-
+var temp;
 function printQues() {
     
     document.getElementById("quesid").innerHTML="Q"+itemOperations.itemList[i].id;
@@ -40,8 +40,8 @@ function printQues() {
     document.getElementById("input2").innerHTML=itemOperations.itemList[i].option2;
     document.getElementById("input3").innerHTML=itemOperations.itemList[i].option3;
     document.getElementById("input4").innerHTML=itemOperations.itemList[i].option4;
-    
-    
+
+    temp = itemOperations.itemList[i].ans;
 }
 
 function endTest() {
@@ -49,19 +49,22 @@ function endTest() {
 }
 
 function submitans() {
-    nextQ();
+    
     var option = document.getElementsByName('q');
+    
     var option_value;
         for(var a = 0; a < option.length; a++){
+            
             if(option[a].checked){
                     option_value = option[a].value;
                     }
             }
     
-    if(option_value == itemOperations.itemList[i].ans )
+    if(option_value == temp )
     {
         marks+=10;
     }
+    nextQ();
 //    console.log(marks);
         
 }
@@ -94,22 +97,32 @@ function prevQ() {
 }
 
 function timer() {
-    var min = 9;
-    var sec = 60;
-    setInterval(function(){
+    var min = 0;
+    var sec = 4;
+    var x =setInterval(function(){
     var a = new Date();
         document.getElementById("timer").innerHTML = min +" : " + sec ;
         sec--;
         if(sec == 00)
         {
-            min--;
-            sec = 60;
-            if (min == 0 & sec
-               ==0)
+            
+            
+            if (min == 0 && sec==0)
             {
+                
+                clearInterval(x);
                 alert("time is over!!!");
                 endTest();
+                
+
             }
+            if(min == 0){
+                console.log(marks);
+                alert("Your Score is "+marks);             
+                
+            }
+            min--;
+            sec = 60;
         }
         },1000);
     
