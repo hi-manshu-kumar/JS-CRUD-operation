@@ -14,6 +14,12 @@ function bindEvents() {
 
 var i=0;
 var marks=0;
+function disabled(){
+    document.getElementById("prevQ").setAttribute("disabled",true);
+    document.getElementById("nextQ").setAttribute("disabled",true);
+    document.getElementById("submit").setAttribute("disabled",true);
+
+}
 
 function fetchLocal() {
 	if(window.localStorage){
@@ -46,6 +52,7 @@ function printQues() {
 
 function endTest() {
     document.getElementById("total").innerHTML="Total result is "+ marks;
+    disabled();
 }
 
 function submitans() {
@@ -75,11 +82,9 @@ function nextQ() {
     if(i<=imax){
         i++;
         printQues();
-        
     }
     else{
-        alert("No ques to print...");
-        
+        alert("No ques to print...");  
     }
     
 }
@@ -87,12 +92,10 @@ function nextQ() {
 function prevQ() {
     if(i>0){
         i--;
-        printQues();
-                
+        printQues();           
     }
     else{
-        alert("No ques to print...");
-        
+        alert("No ques to print..."); 
     }
 }
 
@@ -105,21 +108,16 @@ function timer() {
         sec--;
         if(sec == 00)
         {
-            
-            
             if (min == 0 && sec==0)
             {
-                
                 clearInterval(x);
                 alert("time is over!!!");
-                endTest();
-                
-
+                disabled();
+                endTest();            
             }
             if(min == 0){
                 console.log(marks);
-                alert("Your Score is "+marks);             
-                
+                alert("Your Score is "+marks);                            
             }
             min--;
             sec = 60;
